@@ -15,6 +15,6 @@ namespace GerenciadorLivro.Domain.Repositories
         Task<IList<Book>> GetReserved();
         Task<IList<Book>> GetAvailable();
         Task<Book> GetById(int id);
-        Task Delete(int id);
+        Task Delete(Book model);
     }
 }

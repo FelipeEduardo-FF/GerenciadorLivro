@@ -26,6 +26,10 @@
         {
             Status = StatusBook.available;  
         }
+        public void Delete()
+        {
+            Status = StatusBook.deleted;
+        }
 
     }
 }
