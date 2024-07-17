@@ -1,4 +1,5 @@
 ﻿using GerenciadorLivro.Application.DTO.ViewModel;
+using GerenciadorLivro.Application.Results;
 using GerenciadorLivro.Domain.Repositories;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorLivro.Application.Query.Users.Handlers
 {
-    public class GetUserByIdHandler : IRequestHandler<GetUserById, UserViewModel>
+    public class GetUserByIdHandler : IRequestHandler<GetUserById, Result<UserViewModel>>
     {
         private readonly IUserRepository _repository;
 
@@ -17,7 +18,7 @@ namespace GerenciadorLivro.Application.Query.Users.Handlers
         {
             this._repository = repository;
         }
-        public async Task<UserViewModel> Handle(GetUserById request, CancellationToken cancellationToken)
+        public async Task<Result<UserViewModel>> Handle(GetUserById request, CancellationToken cancellationToken)
         {
             var user = await _repository.GetById(request.Id);
 

@@ -31,6 +31,8 @@ namespace GerenciadorLivro.Infrastructure
         {
 
             service.AddScoped<IUserRepository,UserRepository>();
+            service.AddScoped<IBookRepository,BookRepository>();
+            service.AddScoped<ILoanRepository,LoanRepository>();
             return service;
         }
     }

@@ -15,8 +15,4 @@
     <ProjectReference Include="..\GerenciadorLivro.Infrastructure\GerenciadorLivro.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Query\Books\" />
-  </ItemGroup>
-
 </Project>

@@ -13,7 +13,7 @@ namespace GerenciadorLivro.Domain.Model
             UserId = userId;
             BookId = bookId;
             DateLoan = DateTime.Now;
-            DateLoan = DateTime.Now.AddDays(7);
+            DateDevolution = DateTime.Now.AddDays(7);
             DateReturned = null;
         }
 

@@ -50,7 +50,7 @@ namespace GerenciadorLivro.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("GerenciadorLivro.Domain.Model.Loan", b =>
@@ -82,7 +82,7 @@ namespace GerenciadorLivro.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Loans");
+                    b.ToTable("Loans", (string)null);
                 });
 
             modelBuilder.Entity("GerenciadorLivro.Domain.Model.User", b =>
@@ -101,7 +101,7 @@ namespace GerenciadorLivro.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("GerenciadorLivro.Domain.Model.Loan", b =>

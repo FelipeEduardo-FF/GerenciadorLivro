@@ -1,4 +1,6 @@
-﻿using GerenciadorLivro.Domain.Model;
+﻿
+using GerenciadorLivro.Application.Results;
+using GerenciadorLivro.Domain.Model;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GerenciadorLivro.Application.Query.Users
+namespace GerenciadorLivro.Application.Command.Users
 {
-    public class AddUser:IRequest<Guid>
+    public class AddUser : IRequest<Result<Guid>>
     {
         [Required]
         public string Nome { get; set; } = string.Empty;

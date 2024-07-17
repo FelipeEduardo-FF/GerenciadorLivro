@@ -1,4 +1,5 @@
 ﻿using GerenciadorLivro.Application.DTO.ViewModel;
+using GerenciadorLivro.Application.Results;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorLivro.Application.Query.Users
 {
-    public class GetUsers:IRequest<List<UserViewModel>>
+    public class GetUsers:IRequest<Result<List<UserViewModel>>>
     {
     }
 }

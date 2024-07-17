@@ -1,7 +1,9 @@
-﻿using GerenciadorLivro.Application.Query.Users;
+﻿using Azure;
+using GerenciadorLivro.API.Extensions;
+using GerenciadorLivro.Application.Command.Users;
+using GerenciadorLivro.Application.Query.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace GerenciadorLivro.API.Controllers
 {
@@ -20,12 +22,11 @@ namespace GerenciadorLivro.API.Controllers
         public async Task<IActionResult> Get(Guid id)
         {
             var query = new GetUserById(id);
-            var result = await _mediator.Send(query);
+            var response = await _mediator.Send(query);
 
-            if(result is null)
-                return NotFound();
-
-            return Ok(result);
+            return response.Match(
+                success: (value) => Ok(value),
+                failure: value => value.ToProblemDetails());
         }
 
 
@@ -33,19 +34,20 @@ namespace GerenciadorLivro.API.Controllers
         public async Task<IActionResult> Get()
         {
             var query = new GetUsers();
-            var result = await _mediator.Send(query);
+            var response = await _mediator.Send(query);
 
-            if (result is null)
-                return NotFound();
-
-            return Ok(result);
+            return response.Match(
+                success: (value) => Ok(value),
+                failure: value => value.ToProblemDetails());
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(AddUser request)
         {
-            var id = await _mediator.Send(request);
-            return CreatedAtAction(nameof(Get), new { id = id }, request);
+            var response = await _mediator.Send(request);
+            return response.Match(
+                 success: (value) => CreatedAtAction(nameof(Get), new { id = value }, request) ,
+                 failure: value => value.ToProblemDetails());
         }
     }
 }
