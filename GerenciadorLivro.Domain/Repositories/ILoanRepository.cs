@@ -11,8 +11,8 @@ namespace GerenciadorLivro.Domain.Repositories
     {
         Task Create(Loan model);
         Task Update(Loan model);
-        Task<IList<Loan>> Get();
         Task<Loan> GetById(int id);
         Task<Loan> GetByBookAndUser(int bookId, Guid userId);
+        Task<List<Loan>> GetExpired();
     }
 }

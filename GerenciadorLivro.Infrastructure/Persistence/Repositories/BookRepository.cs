@@ -31,7 +31,7 @@ namespace GerenciadorLivro.Infrastructure.Persistence.Repositories
 
         public async Task<IList<Book>> Get()
         {
-            return await _context.Books.ToListAsync();
+            return await _context.Books.Where(bo => bo.Status != StatusBook.deleted).ToListAsync();
         }
 
         public async Task<IList<Book>> GetAvailable()

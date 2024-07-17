@@ -1,13 +1,14 @@
 using GerenciadorLivro.Application;
 using GerenciadorLivro.Infrastructure;
+using GerenciadorLivro.Infrastructure.Services;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddHttpClient();
 builder.Services.AddInfraModules(builder.Configuration);
 builder.Services.AddApplicationModule();
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,6 +23,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
 
 app.UseHttpsRedirection();
 

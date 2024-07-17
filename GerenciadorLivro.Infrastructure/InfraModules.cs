@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using GerenciadorLivro.Domain.Repositories;
 using GerenciadorLivro.Infrastructure.Persistence.Repositories;
+using GerenciadorLivro.Infrastructure.Services;
+using System.Text.Json;
 
 
 namespace GerenciadorLivro.Infrastructure
@@ -16,6 +18,7 @@ namespace GerenciadorLivro.Infrastructure
 
             service.AddDbContext(configuration);
             service.AddRepo();
+            service.AddServices(configuration);  
             return service;
         }
 
@@ -33,6 +36,20 @@ namespace GerenciadorLivro.Infrastructure
             service.AddScoped<IUserRepository,UserRepository>();
             service.AddScoped<IBookRepository,BookRepository>();
             service.AddScoped<ILoanRepository,LoanRepository>();
+            return service;
+        }
+
+        public static IServiceCollection AddServices(this IServiceCollection service, IConfiguration configuration)
+        {
+            var config = new MailConfig();
+
+            configuration.GetSection("Notifications").Bind(config) ;
+
+
+            service.AddSingleton<MailConfig>(m => config);
+
+            service.AddScoped<INotificationService, NotificationService>();
+
             return service;
         }
     }

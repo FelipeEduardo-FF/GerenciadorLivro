@@ -17,9 +17,9 @@ namespace GerenciadorLivro.Infrastructure.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IList<Loan>> Get()
+        public async Task<List<Loan>> GetExpired()
         {
-            return await _context.Loans.ToListAsync();
+            return await _context.Loans.Where(loan=>loan.DateDevolution<DateTime.Now).Include(loan=>loan.User).ToListAsync();
         }
 
         public async Task<Loan?> GetByBookAndUser(int bookId, Guid userId)
